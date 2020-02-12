@@ -28,23 +28,23 @@ feature 'User can create a new account' do
         end 
     end 
 
-    #Sad path
+    #Sad paths
     describe 'User does not put any input' do
-     before do
-       fill_in 'Name', with: ''
-       fill_in 'Email', with: ''
-       fill_in 'Password', with: ''
-       fill_in 'Password confirmation', with: ''
+        before do
+            fill_in 'Name', with: ''
+            fill_in 'Email', with: ''
+            fill_in 'Password', with: ''
+            fill_in 'Password confirmation', with: ''
 
-        click_on "Create"
-    end
+            click_on "Create"
+        end
 
-    it 'Displays an error for missing data' do
-        expect(page).to have_content "Email can't be blank"
-        expect(page).to have_content "Password can't be blank"
-        expect(page).to have_content "Name can't be blank"
+        it 'Displays an error for missing data' do
+            expect(page).to have_content "Email can't be blank"
+            expect(page).to have_content "Password can't be blank"
+            expect(page).to have_content "Name can't be blank"
+        end
     end
-end
   
     describe 'User enters email in a wrong format' do
         before do
@@ -59,7 +59,26 @@ end
         it 'displays error if email format is entered incorrectly' do
           expect(page).to have_content 'Email is invalid'
         end 
+    end
 
+    describe 'If name and email have already been used' do
+        before do
+            fill_in 'Name', with: 'Janko'
+            fill_in 'Email', with: 'test_emailgmail.com'
+            fill_in 'Password', with: 'password1'
+            fill_in 'Password confirmation', with: 'password1'
+
+            click_on "Create"
+
+            fill_in 'Name', with: 'Janko'
+            fill_in 'Email', with: 'test_emailgmail.com'
+            fill_in 'Password', with: 'password2'
+            fill_in 'Password confirmation', with: 'password2'
+        end
+
+        it 'displays error if email or name has already been used' do
+          expect(page).to have_content 'error prohibited this user from being saved'
+        end 
     end
 end
 
