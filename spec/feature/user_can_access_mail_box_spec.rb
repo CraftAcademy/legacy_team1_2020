@@ -12,7 +12,15 @@ feature 'User can access inbox' do
     it'display login' do
         expect(page).to have_content'Login'
     end
-    # it 'displays the mailbox page' do
-    # end
 
+    describe 'displays the login page' do
+        before do      
+            click_on 'Login'
+            visit user_session_path
+        end
+
+        it 'displays login page' do
+            expect(page).to have_content 'Log in'
+        end
+    end
 end
