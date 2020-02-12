@@ -2,6 +2,17 @@ require "rails_helper"
 require "pry"
 
 feature 'User can create a new account' do
+    describe 'user can access sign up page' do 
+        before do 
+            visit root_path
+            click_on "Sign up"
+        end
+
+        it 'link to sign up from homepage takes user to sign up page' do
+        expect(current_path).to eq new_user_registration_path
+        end
+    end 
+
     before do 
         visit new_user_registration_path
     end
