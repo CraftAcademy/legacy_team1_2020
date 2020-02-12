@@ -80,5 +80,24 @@ feature 'User can create a new account' do
           expect(page).to have_content 'error prohibited this user from being saved'
         end 
     end
+
+    describe 'User enters too short password or too long name' do
+        before do
+            fill_in 'Name', with: 'Janko Radakovic'
+            fill_in 'Email', with: 'test_emailgmail.com'
+            fill_in 'Password', with: 'pass'
+            fill_in 'Password confirmation', with: 'pass'
+
+            click_on "Create"
+        end
+
+        it 'displays error if name is more then 10 characters' do
+          expect(page).to have_content 'Name is too long'
+        end 
+
+        it 'displays error if password is less then 8 characters' do
+            expect(page).to have_content 'Password is too short'
+          end 
+    end
 end
 
