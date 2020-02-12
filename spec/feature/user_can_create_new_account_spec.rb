@@ -7,8 +7,8 @@ feature 'User can create a new account' do
     end
 
     it 'displays the sign up page' do
-        expect(page).to have_content 'Name'
-        expect(page).to have_content 'Email'
-        expect(page).to have_content 'Password'
+        expect(page).to have_field 'Name'
+        expect(page).to have_field 'Email'
+        expect(page).to have_field 'Password'
     end
 end
