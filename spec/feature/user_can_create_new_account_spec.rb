@@ -28,7 +28,38 @@ feature 'User can create a new account' do
         end 
     end 
 
-    
+    #Sad path
+    describe 'User does not put any input' do
+     before do
+       fill_in 'Name', with: ''
+       fill_in 'Email', with: ''
+       fill_in 'Password', with: ''
+       fill_in 'Password confirmation', with: ''
 
+        click_on "Create"
+    end
+
+    it 'Displays an error for missing data' do
+        expect(page).to have_content "Email can't be blank"
+        expect(page).to have_content "Password can't be blank"
+        expect(page).to have_content "Name can't be blank"
+    end
+end
+  
+    describe 'User enters email in a wrong format' do
+        before do
+            fill_in 'Name', with: 'Janko'
+            fill_in 'Email', with: 'test_emailgmail.com'
+            fill_in 'Password', with: 'password1'
+            fill_in 'Password confirmation', with: 'password1'
+
+            click_on "Create"
+        end
+
+        it 'displays error if email format is entered incorrectly' do
+          expect(page).to have_content 'Email is invalid'
+        end 
+
+    end
 end
 
