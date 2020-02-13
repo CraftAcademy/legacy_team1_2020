@@ -35,7 +35,7 @@ feature 'User can create a new account' do
         end 
 
         it 'displays message if sign up was successful' do
-            expect(page).to have_content 'Hello, Janko'
+            expect(page).to have_content 'Welcome! You have signed up successfully.'
         end 
 
     end 
