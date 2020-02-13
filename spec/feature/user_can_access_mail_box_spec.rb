@@ -25,8 +25,17 @@ feature 'User can access inbox' do
 
         it' display the input fields' do
             expect(page).to have_field 'Email'
+        end
+        
+        it' display the input fields' do
             expect(page).to have_field 'Password'
+        end
+
+        it' display the input fields' do
             expect(page).to have_field 'Remember me'
+        end
+
+        it' display the input fields' do
             expect(page).to have_link('Sign up', href: new_user_registration_path)
             #it { should have_link('Help', href: help_path) }
         end
