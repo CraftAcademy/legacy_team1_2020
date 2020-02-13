@@ -13,6 +13,7 @@ feature 'User tries to login' do
     click_on 'Login'
   end
 
+    #HAPPY PATH
   describe 'successfully' do
     before do
       fill_in 'Email', with: user.email
@@ -28,7 +29,9 @@ feature 'User tries to login' do
       expect(page).to have_content 'Hello, Joe'
     end
   end
+    #HAPPY PATH END
 
+    #SAD PATH
   describe 'unsuccessfully with' do 
     describe 'incorrect password' do
       before do
@@ -37,8 +40,8 @@ feature 'User tries to login' do
         click_on 'Log in'
       end
 
-      it 'user gets welcome message' do
-        expect(page).to have_content 'Hello, Joe'
+      it 'the password is wrong' do
+        expect(page).to have_content 'Invalid Email or password'
       end
     end
 
@@ -49,8 +52,8 @@ feature 'User tries to login' do
         click_on 'Log in'
       end
 
-      it 'user gets welcome message' do
-        expect(page).to have_content 'Hello, Joe'
+      it 'not existent user' do
+        expect(page).to have_content 'Invalid Email or password'
       end
     end
 
@@ -61,8 +64,8 @@ feature 'User tries to login' do
         click_on 'Log in'
       end
 
-      it 'user gets welcome message' do
-        expect(page).to have_content 'Hello, Joe'
+      it 'wrong email' do
+        expect(page).to have_content 'Invalid Email or password'
       end
     end
   end
