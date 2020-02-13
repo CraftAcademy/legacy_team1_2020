@@ -67,6 +67,8 @@ feature 'User tries to login' do
       it 'wrong email' do
         expect(page).to have_content 'Invalid Email or password'
       end
+
+      
     end
   end
 end
