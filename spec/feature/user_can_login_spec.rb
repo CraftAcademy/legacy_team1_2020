@@ -28,6 +28,8 @@ feature 'User tries to login' do
     it 'user gets welcome message' do
       expect(page).to have_content 'Hello, Joe'
     end
+
+    
   end
     #HAPPY PATH END
 
@@ -67,8 +69,29 @@ feature 'User tries to login' do
       it 'wrong email' do
         expect(page).to have_content 'Invalid Email or password'
       end
-
-      
     end
   end
 end
+
+# feature 
+
+# describe 'accessing mailbox'do
+#     before do
+#       visit root_path
+
+#       click_on 'Inbox'
+#       end
+
+#       it 'displays the inbox page'do
+#       expect(current_path).to eq new_session_path
+#       end
+#     end
+
+
+  
+
+    
+
+
+  
+
