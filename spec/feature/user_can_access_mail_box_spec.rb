@@ -4,56 +4,66 @@ require "pry"
 
 
 
-feature 'User can access inbox' do
-    before do 
-        visit root_path
+feature 'User tries to login' do
+  let(:user) { FactoryBot.create(:user, email: 'user@mail.com', password: 'password') }
+
+  before do 
+    visit root_path
+
+    click_on 'Login'
+  end
+
+  describe 'successfully' do
+    before do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      click_on 'Log in'
     end
 
-        #Checking Login from homepage
-    it'display login' do
-        expect(page).to have_content'Login'
+    it 'user gets redirected to root path' do
+      expect(current_path).to eq root_path
     end
 
-        #Testing components from Log in page
-    describe 'displays the login page' do
-        before do      
-            click_on 'Login'
-            visit user_session_path
-        end
+    it 'user gets welcome message' do
+      expect(page).to have_content 'Hello, Joe'
+    end
+  end
 
-        it 'displays login page' do
-            expect(page).to have_content 'Log in'
-        end
+  describe 'unsuccessfully with' do 
+    describe 'incorrect password' do
+      before do
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: 'wrong_password'
+        click_on 'Log in'
+      end
 
-        it' display the input fields' do
-            expect(page).to have_field 'Email'
-        end
-        
-        it' display the input fields' do
-            expect(page).to have_field 'Password'
-        end
-
-        it' display the input fields' do
-            expect(page).to have_field 'Remember me'
-        end
-
-        it' display the link' do
-            expect(page).to have_link('Sign up', href: new_user_registration_path)
-            #it { should have_link('Help', href: help_path) }
-        end
-
-        it 'display the link' do
-            expect(page).to have_link('Forgot your password?', href: new_user_password_path)
-        end
-
-        it'displays the Sign up button' do
-            expect(page).to have_link('Sign up', href: new_user_registration_path)
-        end
-
-        it 'displays the link to the home page' do
-            expect(page).to have_link('CA Mailboxer', href: root_path)
-        end
-
+      it 'user gets welcome message' do
+        expect(page).to have_content 'Hello, Joe'
+      end
     end
 
+    describe 'non registred email' do
+      before do
+        fill_in 'Email', with: 'not_existent_user@mail.com'
+        fill_in 'Password', with: user.password
+        click_on 'Log in'
+      end
+
+      it 'user gets welcome message' do
+        expect(page).to have_content 'Hello, Joe'
+      end
+    end
+
+    describe 'invalid email' do
+      before do
+        fill_in 'Email', with: 'invalid_email.'
+        fill_in 'Password', with: user.password
+        click_on 'Log in'
+      end
+
+      it 'user gets welcome message' do
+        expect(page).to have_content 'Hello, Joe'
+      end
+    end
+  end
 end
