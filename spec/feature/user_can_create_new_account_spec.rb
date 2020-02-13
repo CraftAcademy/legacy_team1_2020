@@ -1,5 +1,5 @@
 require "rails_helper"
-require "pry"
+
 
 feature 'User can create a new account' do
     describe 'user can access sign up page' do 
@@ -11,6 +11,7 @@ feature 'User can create a new account' do
         it 'link to sign up from homepage takes user to sign up page' do
         expect(current_path).to eq new_user_registration_path
         end
+
     end 
 
     before do 
@@ -18,9 +19,8 @@ feature 'User can create a new account' do
     end
 
     it 'displays the sign up page' do
-        expect(page).to have_field 'Name'
-        expect(page).to have_field 'Email'
-        expect(page).to have_field 'Password'
+        expect(page).to have_field {'Name';'Email';'Password'}
+
     end
 
     #Happy path where user enters what we want and the sign up is successful
@@ -31,12 +31,13 @@ feature 'User can create a new account' do
             fill_in 'Email', with: 'test_email@gmail.com'
             fill_in 'Password', with: 'password1'
             fill_in 'Password confirmation', with: 'password1'
-
             click_on "Create"
         end 
+
         it 'displays message if sign up was successful' do
-            expect(page).to have_content 'Hello, Janko'
+            expect(page).to have_content 'Welcome! You have signed up successfully.'
         end 
+
     end 
 
     #Sad paths
@@ -46,14 +47,11 @@ feature 'User can create a new account' do
             fill_in 'Email', with: ''
             fill_in 'Password', with: ''
             fill_in 'Password confirmation', with: ''
-
             click_on "Create"
         end
 
         it 'Displays an error for missing data' do
-            expect(page).to have_content "Email can't be blank"
-            expect(page).to have_content "Password can't be blank"
-            expect(page).to have_content "Name can't be blank"
+            expect(page).to have_content "Email can't be blank" "Password can't be blank" "Name can't be blank"
         end
     end
   
@@ -63,13 +61,13 @@ feature 'User can create a new account' do
             fill_in 'Email', with: 'test_emailgmail.com'
             fill_in 'Password', with: 'password1'
             fill_in 'Password confirmation', with: 'password1'
-
             click_on "Create"
         end
 
         it 'displays error if email format is entered incorrectly' do
           expect(page).to have_content 'Email is invalid'
         end 
+
     end
 
     describe 'If name and email have already been used' do
@@ -90,6 +88,7 @@ feature 'User can create a new account' do
         it 'displays error if email or name has already been used' do
           expect(page).to have_content 'error prohibited this user from being saved'
         end 
+
     end
 
     describe 'User enters too short password or too long name' do
@@ -98,7 +97,6 @@ feature 'User can create a new account' do
             fill_in 'Email', with: 'test_emailgmail.com'
             fill_in 'Password', with: 'pass'
             fill_in 'Password confirmation', with: 'pass'
-
             click_on "Create"
         end
 
@@ -110,5 +108,24 @@ feature 'User can create a new account' do
             expect(page).to have_content 'Password is too short'
           end 
     end
+
+    describe 'User count in database equals 1' do
+        before do 
+            
+            fill_in 'Name', with: 'Janko'
+            fill_in 'Email', with: 'test_email@gmail.com'
+            fill_in 'Password', with: 'password1'
+            fill_in 'Password confirmation', with: 'password1'
+            click_on "Create"
+        end 
+
+        it 'Checks if the user is saved in db' do
+            expect(User.count).to eq 1
+        end 
+
+    end 
 end
+
+
+
 
