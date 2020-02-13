@@ -108,5 +108,24 @@ feature 'User can create a new account' do
             expect(page).to have_content 'Password is too short'
           end 
     end
+
+    describe 'User count in database equals 1' do
+        before do 
+            
+            fill_in 'Name', with: 'Janko'
+            fill_in 'Email', with: 'test_email@gmail.com'
+            fill_in 'Password', with: 'password1'
+            fill_in 'Password confirmation', with: 'password1'
+            click_on "Create"
+        end 
+
+        it 'Checks if the user is saved in db' do
+            expect(User.count).to eq 1
+        end 
+
+    end 
 end
+
+
+
 
