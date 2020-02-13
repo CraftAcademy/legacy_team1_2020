@@ -51,9 +51,7 @@ feature 'User can create a new account' do
         end
 
         it 'Displays an error for missing data' do
-            expect(page).to have_content "Email can't be blank"
-            expect(page).to have_content "Password can't be blank"
-            expect(page).to have_content "Name can't be blank"
+            expect(page).to have_content "Email can't be blank" "Password can't be blank" "Name can't be blank"
         end
     end
   
