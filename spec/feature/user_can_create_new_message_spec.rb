@@ -1,7 +1,7 @@
 require "rails_helper"
 
 
-feature 'User can create a new message' do
+feature 'User can send an email' do
     let(:user) { FactoryBot.create(:user, email:'user1_email@gmail.com', password:'password1' )}
 
     before do 
@@ -14,11 +14,20 @@ feature 'User can create a new message' do
         click_on 'Compose'
 
     end 
+        it 'User start composing email ' do
+          expect(current_path).to eq new_conversation_path
+          end
 
-    describe 'user can view the compose button' do 
+    describe 'Successfully' do 
+      before do
+        click_on 'User'
+        fill_in 'Subject', with: 'Subject'
+        fill_in 'Type your message here', with: 'Message'
+        click_on 'Send Message'
+      end
 
-        it 'link to sign up from homepage takes user to sign up page' do
-        expect(current_path).to eq new_conversation_path
+        it 'Mail sent' do
+            expect(page).to have_content 'message was successfully sent'
         end
     end 
 end
