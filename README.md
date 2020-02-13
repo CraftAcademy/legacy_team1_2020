@@ -28,18 +28,24 @@ This software is a digital mailbox system using Ruby on Rails to allow users to 
 
 * Ruby version 2.4.3
 * Rails version 5.1.5
-* Gems: Rspec, Pry, Pry-ByeBug, Rake, Coveralls, Rubocop
-*Finish this section!!!
+* Heroku
+* Gems: Bootstrap-sas, Devise, Pry-byebug, Spring, Rspec-rails, Shoulda-matchers, FactoryBot, Capybara, Coveralls, Rails_12factor (see Gemfile for full list)
+
 
 ## Setup
-To access this code visit this [GitHub]() repo and complete the following steps:
+To access this code visit this [GitHub](https://github.com/Carltesio/legacy_team1_2020) repo and complete the following steps:
 
 1. Fork the repo and clone it to your local computer
-2. Have the Ruby and Gem bundler installed
-3. Utilize IRB to run program
+2. Have the Ruby, Rails and Gem bundler installed
+3. Optional: connect to Coveralls, Semaphore, and Heroku 
 
 ## Instructions
-Instructions for running 
+Instructions for running the mailbox application:
+1. Initiate the server
+        $ rails server
+2. Copy the local link
+        localhost:3000
+3. 
 
 
 ## Acknowledgements
