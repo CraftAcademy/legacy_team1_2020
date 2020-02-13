@@ -23,9 +23,7 @@ feature 'User can create a new account' do
         expect(page).to have_field 'Password'
     end
 
-    #Happy path where user enters what we want and the sign up is successful
-    describe 'User correctly and successfully entered their data to create account' do
-        before do 
+   
             #add dummy user data with fillin
             fill_in 'Name', with: 'Janko'
             fill_in 'Email', with: 'test_email@gmail.com'
