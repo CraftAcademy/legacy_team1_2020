@@ -44,4 +44,31 @@ feature 'User can send an email' do
       end
     end
 
+    #Note: Feature seems to break if subject is missing. Code needs to be modified before test will pass.
+    describe 'Unsuccessfully - missing subject' do 
+        before do
+          click_on 'User'
+          fill_in 'Subject', with: ''
+          fill_in 'Type your message here', with: 'Message'
+          click_on 'Send Message'
+        end 
+  
+        it 'Mail not sent - subject is missing' do
+          expect(page).to have_content 'Subject is missing'
+        end
+      end
+
+        #Note: Feature seems to break if the message is missing. Code needs to be modified before test will pass.
+    describe 'Unsuccessfully - missing message' do 
+        before do
+          click_on 'User'
+          fill_in 'Subject', with: 'Subject'
+          fill_in 'Type your message here', with: ''
+          click_on 'Send Message'
+        end 
+  
+        it 'Mail not sent - message is missing' do
+          expect(page).to have_content 'Message is missing'
+        end
+      end
 end
