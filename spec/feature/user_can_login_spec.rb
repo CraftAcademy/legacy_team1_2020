@@ -26,7 +26,7 @@ feature 'User tries to login' do
     end
 
     it 'user gets welcome message' do
-      expect(page).to have_content 'Hello, Joe'
+      expect(page).to have_content 'Hello, User1'
     end
 
     
