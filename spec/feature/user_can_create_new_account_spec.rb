@@ -120,7 +120,7 @@ feature 'User can create a new account' do
         end 
 
         it 'Checks if the user is saved in db' do
-            expect(User.count).to eq 1
+            expect(change{User.count})
         end 
 
     end 
