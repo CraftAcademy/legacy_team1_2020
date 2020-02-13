@@ -61,6 +61,7 @@ MIT License <br><br><br>
 ## Notes from Coaches
 
 ----
+
 ### CA Mailboxer 2018
 
 Code base for week 2 challenge - Working with legacy code

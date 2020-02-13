@@ -30,4 +30,18 @@ feature 'User can send an email' do
             expect(page).to have_content 'message was successfully sent'
         end
     end 
+     
+    #Note: The next describe block fails because the feature currently send even when no recipient is selected
+     describe 'Unsuccessfully - missing recipient' do 
+      before do
+        fill_in 'Subject', with: 'Subject'
+        fill_in 'Type your message here', with: 'Message'
+        click_on 'Send Message'
+      end 
+
+      it 'Mail not sent' do
+        expect(page).to have_content 'message was not sent'
+      end
+    end
+
 end
