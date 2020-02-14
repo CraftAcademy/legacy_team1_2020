@@ -7,8 +7,13 @@ class ConversationsController < ApplicationController
   def create
     recipients = User.where(id: conversation_params[:recipients])
     conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
-    flash[:success] = 'Your message was successfully sent!'
-    redirect_to conversation_path(conversation)
+    if conversation && conversation_params[:recipients] != [""] 
+      flash[:success] = 'Your message was successfully sent!'
+      redirect_to conversation_path(conversation.id)
+    else
+      redirect_to request.referer
+      flash[:error] = 'Make sure you fill out every possible message option'
+    end
   end
 
   def show
