@@ -11,22 +11,33 @@ feature 'User can view sent mail and reply' do
         fill_in 'Password', with: user.password
         click_on 'Log in'
         click_on 'Inbox'
-        click_on 'Sent'
+    end
 
-    end 
+    describe 'Successful click on Sent mail' do
+        before do 
+        click_on 'Sent'
+        end
+
+    
         it 'User start composing email ' do
           expect(current_path).to eq mailbox_sent_path
           end
+    end
 #Test make user 1 send mail to user 2 then check that user 2 sees mail
 # Test reply
 
     describe 'Successfully' do 
       before do
+        click_on 'Compose'
         click_on 'User'
-        fill_in 'Subject', with: 'Subject'
+        fill_in 'Subject', with: 'Subject sent mail'
         fill_in 'Type your message here', with: 'Message'
         click_on 'Send Message'
+        click_on 'Sent'
       end
 
+      it 'User can view a sent email' do
+          expect(page).to have_content 'Subject sent mail'
+      end
     end
 end
