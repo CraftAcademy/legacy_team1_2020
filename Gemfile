@@ -28,6 +28,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara' 
   gem 'coveralls', require: false
+  gem 'launchy'
+  gem 'pry-rails'
 end
 
 group :production do
