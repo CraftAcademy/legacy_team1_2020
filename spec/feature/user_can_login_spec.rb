@@ -72,24 +72,6 @@ feature 'User tries to login' do
     end
   end
 end
-
-# feature 
-
-# describe 'accessing mailbox'do
-#     before do
-#       visit root_path
-
-#       click_on 'Inbox'
-#       end
-
-#       it 'displays the inbox page'do
-#       expect(current_path).to eq new_session_path
-#       end
-#     end
-
-
-  
-
     
 
 
