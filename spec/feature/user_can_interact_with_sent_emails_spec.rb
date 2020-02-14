@@ -27,15 +27,9 @@ feature 'User can view sent mail and reply' do
           expect(page).to have_content 'Subject sent mail'
       end
 
-    describe 'Successful click on Sent mail' do
-        before do 
-        click_on 'Sent'
-        end
-
-    
-        it 'User start composing email ' do
-          expect(current_path).to eq mailbox_sent_path
-          end
+      it 'User can navigate to Sent mails ' do
+        expect(current_path).to eq mailbox_sent_path
+      end
 
         describe 'User can view the sent mail item' do 
             before do 
@@ -54,5 +48,4 @@ feature 'User can view sent mail and reply' do
         end 
  
     end
-end
 end
