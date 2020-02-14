@@ -13,6 +13,20 @@ feature 'User can view sent mail and reply' do
         click_on 'Inbox'
     end
 
+    describe 'Successfully' do 
+      before do
+        click_on 'Compose'
+        click_on 'User'
+        fill_in 'Subject', with: 'Subject sent mail'
+        fill_in 'Type your message here', with: 'Message for sent mail'
+        click_on 'Send Message'
+        click_on 'Sent'
+      end
+
+      it 'User can view a sent email' do
+          expect(page).to have_content 'Subject sent mail'
+      end
+
     describe 'Successful click on Sent mail' do
         before do 
         click_on 'Sent'
@@ -22,22 +36,23 @@ feature 'User can view sent mail and reply' do
         it 'User start composing email ' do
           expect(current_path).to eq mailbox_sent_path
           end
-    end
-#Test make user 1 send mail to user 2 then check that user 2 sees mail
-# Test reply
 
-    describe 'Successfully' do 
-      before do
-        click_on 'Compose'
-        click_on 'User'
-        fill_in 'Subject', with: 'Subject sent mail'
-        fill_in 'Type your message here', with: 'Message'
-        click_on 'Send Message'
-        click_on 'Sent'
-      end
+        describe 'User can view the sent mail item' do 
+            before do 
+                click_on 'View'
 
-      it 'User can view a sent email' do
-          expect(page).to have_content 'Subject sent mail'
-      end
+             end 
+
+            #it 'User is redirected to the specific mail item' do
+                #expect(current_path).to eq conversation_path()
+            #end 
+
+            it 'User can open a sent message' do
+                expect(page).to have_content 'Move to trash'
+            end 
+
+        end 
+ 
     end
+end
 end
